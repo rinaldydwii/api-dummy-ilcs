@@ -1,5 +1,7 @@
 <?php
 
+// use App\Http\Controllers\MVesselController;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -12,5 +14,11 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    return response()->json([
+        'success' => 'true', 
+        'message' => 'Welcome to API Dummy ILCS'
+    ]);
 });
+
+$router->get('/m-vessels', 'MVesselController@index');
+$router->post('/m-vessels', 'MVesselController@store');
