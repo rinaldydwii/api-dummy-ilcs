@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\M_Vessel;
+use App\MVessel;
 
 class MVesselTableSeeder extends Seeder
 {
@@ -52,7 +52,7 @@ class MVesselTableSeeder extends Seeder
     public function run()
     {
         foreach ($this->m_vessels as $m_vessel) {
-            M_Vessel::create([
+            MVessel::create([
                 'vessel_name' => $m_vessel['vessel_name'], 
                 'voyage_in' => $m_vessel['voyage_in'], 
                 'voyage_out' => $m_vessel['voyage_out'],
@@ -62,7 +62,6 @@ class MVesselTableSeeder extends Seeder
                 'terminal' => "Terminal Panjang Indonesia",
                 'name' => "Rinaldy Dwi Istanto"
             ]);
-            echo $m_vessel['vessel_name']." created.";
         }
     }
 }

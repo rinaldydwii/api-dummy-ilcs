@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class M_Vessel extends Model
+class MVessel extends Model
 {
     /**
      * The table associated with the model.
