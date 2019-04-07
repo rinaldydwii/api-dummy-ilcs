@@ -52,13 +52,13 @@ class MVesselController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexByTerminal(Request $request)
+    public function indexName()
     {
-        $m_vessels = MVessel::where('terminal', $id)->get();
+        $name = MVessel::select('name')->groupBy('name')->first();
         return response()->json([
             'success' => true, 
-            'message' => 'Get all of M Vessel Data by Terminal successfully',
-            'data' => $m_vessels
+            'message' => 'Get name successfully',
+            'data' => $name
         ]);
     }
 
