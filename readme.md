@@ -1,21 +1,41 @@
-# Lumen PHP Framework
+# Assesment API
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+by Rinaldy Dwi Istanto
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+## Introduction
 
-## Official Documentation
+This API is serve for [Assesment App](https://github.com/rinaldydwii/assesment-app-icls).
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+## Installation
 
-## Security Vulnerabilities
+Installation require composer and then run
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+```bash
+composer install
+```
 
-## License
+## Configuration
 
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Make sure you are running Postgresql Database.
+
+Copy `.env.example` and rename into `.env`.
+
+Edit `.env`, change `DB_CONNECTION` into `pgsql`, fill `DB_HOST`,`DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`.
+
+And then run
+```bash
+php artisan migrate
+```
+To run with seeder
+```bash
+php artisan migrate:refresh --seed
+```
+## Run Server
+To run application in app folder
+```bash
+php -S localhost:8000 -t public
+```
+Change `localhost:8000` with url and port you want.
+
+\
+End
