@@ -23,6 +23,46 @@ class MVesselController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexTerminal(Request $request)
+    {
+        if ($request -> terminal) {
+            $m_vessels = MVessel::where('terminal', $request -> terminal)->get();
+            $response = array([
+                'success' => true, 
+                'message' => 'Get all of M Vessel Data by Terminal successfully',
+                'data' => $m_vessels
+            ]);
+        } else {
+            $terminal = MVessel::select('terminal')->groupBy('terminal')->get();
+            $response = array([
+                'success' => true, 
+                'message' => 'Get all of Terminal Data successfully',
+                'data' => $terminal
+            ]);
+        }
+        return response()->json($response);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexByTerminal(Request $request)
+    {
+        $m_vessels = MVessel::where('terminal', $id)->get();
+        return response()->json([
+            'success' => true, 
+            'message' => 'Get all of M Vessel Data by Terminal successfully',
+            'data' => $m_vessels
+        ]);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

@@ -22,3 +22,4 @@ $router->get('/', function () use ($router) {
 
 $router->get('/m-vessels', 'MVesselController@index');
 $router->post('/m-vessels', 'MVesselController@store');
+$router->get('/m-vessels/terminals', 'MVesselController@indexTerminal');
