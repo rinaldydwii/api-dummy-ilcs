@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\MVessel;
+use App\Http\Resources\MVessel as MVesselResource;
+
 
 class MVesselController extends Controller
 {
@@ -14,11 +16,10 @@ class MVesselController extends Controller
      */
     public function index()
     {
-        $m_vessels = MVessel::all();
         return response()->json([
             'success' => true, 
             'message' => 'Get all of M Vessel data successfully',
-            'data' => $m_vessels
+            'data' => MVesselResource::collection(MVessel::all())
         ]);
     }
 
@@ -27,24 +28,29 @@ class MVesselController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexTerminal(Request $request)
+    public function indexTerminal()
     {
-        if ($request -> terminal) {
-            $m_vessels = MVessel::where('terminal', $request -> terminal)->get();
-            $response = array([
-                'success' => true, 
-                'message' => 'Get all of M Vessel Data by Terminal successfully',
-                'data' => $m_vessels
-            ]);
-        } else {
-            $terminal = MVessel::select('terminal')->groupBy('terminal')->get();
-            $response = array([
-                'success' => true, 
-                'message' => 'Get all of Terminal Data successfully',
-                'data' => $terminal
-            ]);
-        }
-        return response()->json($response);
+        $terminal = MVessel::select('terminal')->groupBy('terminal')->get();
+        return response()->json([
+            'success' => true, 
+            'message' => 'Get all of Terminal Data successfully',
+            'data' => $terminal
+        ]);
+    }
+
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexByTerminal($terminal)
+    {
+        $m_vessels = MVessel::where('terminal', rawurldecode($terminal))->get();
+        return response()->json($response = [
+            'success' => true, 
+            'message' => 'Get all of M Vessel Data by Terminal successfully',
+            'data' => MVesselResource::collection($m_vessels)
+        ]);
     }
 
     /**
@@ -72,11 +78,11 @@ class MVesselController extends Controller
     {
         $this->validate($request, [
             'vessel_name' => "required|string|max:50",
-            'voyage_in' => "required|string|max:5",
-            'voyage_out' => "required|string|max:5",
+            'voyage_in' => "string|max:5",
+            'voyage_out' => "string|max:5",
             'eta' => "required|date",
             'etb' => "required|date",
-            'etd' => "required|date",
+            'etd' => "date",
             'terminal' => "required|string|max:250",
             'name' => "required|string|max:50",
         ]);
@@ -87,8 +93,8 @@ class MVesselController extends Controller
             'eta' => $request -> eta,
             'etb' => $request -> etb,
             'etd' => $request -> etd,
-            'terminal' => "Terminal Panjang Indonesia",
-            'name' => "Rinaldy Dwi Istanto"
+            'terminal' => $request -> terminal,
+            'name' => $request -> name
         ]);
         return response()->json([
             'success' => true, 

@@ -16,11 +16,11 @@ class CreateMVesselTable extends Migration
         Schema::create('m_vessel', function (Blueprint $table) {
             $table->increments('id');
             $table->string('vessel_name', 50);
-            $table->string('voyage_in', 5);
-            $table->string('voyage_out', 5);
+            $table->string('voyage_in', 5)->nullable();
+            $table->string('voyage_out', 5)->nullable();
             $table->dateTime('eta');
             $table->dateTime('etb');
-            $table->dateTime('etd');
+            $table->dateTime('etd')->nullable();
             $table->string('terminal', 250);
             $table->string('name', 50);
             $table->timestamps();
